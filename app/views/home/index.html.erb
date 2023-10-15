@@ -1,6 +1,13 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
 
-<button class="btn btn-primary">
-  Launch demo modal
-</button>
+<div class="container" data-controller="hello">
+  <h1>Home#index</h1>
+  <p>Find me in app/views/home/index.html.erb</p>
+
+  <button class="btn btn-primary" data-action="hello#toogleTheme">
+    Toggle light/dark mode test3
+  </button>
+
+<!--  <span data-action="click->hello#toogleTheme">-->
+<!--    <i class="bi bi-sun fs-2"></i>-->
+<!--  </span>-->
+</div>

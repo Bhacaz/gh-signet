@@ -1,7 +1,8 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  connect() {
-    this.element.textContent = "Hello World!"
+  toogleTheme() {
+    const theme = document.documentElement.dataset.bsTheme
+    document.documentElement.dataset.bsTheme = theme === "light" ? "dark" : "light"
   }
 }

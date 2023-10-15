@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html data-bs-theme="dark">
   <head>
     <title>GhSignet</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -8,6 +8,7 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <%= hotwire_livereload_tags if Rails.env.development? %>
   </head>
 
   <body>
