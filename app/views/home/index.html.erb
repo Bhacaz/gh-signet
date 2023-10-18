@@ -1,8 +1,9 @@
-
 <div class="container" data-controller="hello">
-  <h1>GitHub Signet</h1>
+  <div class="position-absolute top-50 start-50 translate-middle text-center">
+    <h1 class="mb-4">GitHub Signet</h1>
 
-  <button class="btn btn-primary">
-    Sign in with GitHub
-  </button>
+    <%= form_tag('/auth/github', method: 'post', data: {turbo: false}) do %>
+      <button type='submit' class="btn btn-primary">Sign in with GitHub</button>
+    <% end %>
+  </div>
 </div>

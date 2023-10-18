@@ -1,7 +1,4 @@
 class LoginController < ApplicationController
-  def new
-  end
-
   def create
     auth = request.env['omniauth.auth']
 
@@ -14,6 +11,6 @@ class LoginController < ApplicationController
     user.save!
     session[:user_id] = user.id
 
-    render :new, :notice => "Signed in!\n#{auth.inspect}"
+    redirect_to dashboard_path
   end
 end
