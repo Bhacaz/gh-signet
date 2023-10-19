@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="ref-and-time-ago text-body-secondary">
+    <span class="<%= pull_request.draft ? '' : 'text-primary' %>">
+      <%= pull_request_ref(pull_request) %>
+    </span>
+      - <%= time_ago_in_words pull_request.updated_at %>
+  </div>
+
+  <p>
+    <%=  link_to pull_request.title,
+                   pull_request.pull_request.html_url,
+                   target: '_blank',
+                   class: 'link-body-emphasis link-underline-opacity-0 link-primary-hover' %>
+  </p>
+  <p> <%= pull_request.user.login %> </p>
+</div>

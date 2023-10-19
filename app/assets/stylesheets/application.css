@@ -6,8 +6,17 @@
 
 :root {
     --bs-primary: #49a3a9;
-    --gradient-focus: linear-gradient(120deg, #54b4bb, #7de381);
+    --bs-accent: #7de381;
+    --gradient-focus: linear-gradient(120deg, #7de381, #54b4bb);
     --bs-font-sans-serif: "Roboto Mono", sans-serif;
+}
+
+.text-primary {
+    color: var(--bs-primary) !important;
+}
+
+.link-primary-hover:hover {
+    color: var(--bs-accent) !important;
 }
 
 .btn-primary {
@@ -24,4 +33,20 @@
     --bs-btn-active-bg: var(--bs-primary);
     --bs-btn-active-border-color: var(--bs-primary);
     box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.15);
+}
+
+.pr-list-title-border-bottom {
+    border: 1px solid;
+    border-image-slice: 1;
+    border-width: 2px;
+    border-image-source: var(--gradient-focus);
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    padding-bottom: 0.2em;
+}
+
+.ref-and-time-ago {
+    font-size: 0.85rem;
+    padding-top: 0.25rem;
 }

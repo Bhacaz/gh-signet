@@ -1,6 +1,3 @@
-<h1>Dashboard#index</h1>
-<p>Find me in app/views/dashboard/index.html.erb</p>
-
-<% auth_user.attributes.each do |k, v| %>
-  <%= k %>: <%= v %></br>
-<% end %>
+<div>
+  <%= render partial: 'pr_list', locals: { title: 'My Pull Requests' } %>
+</div>
