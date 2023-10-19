@@ -6,11 +6,14 @@
       - <%= time_ago_in_words pull_request.updated_at %>
   </div>
 
-  <p>
+  <p class="mb-1">
     <%=  link_to pull_request.title,
                    pull_request.pull_request.html_url,
                    target: '_blank',
                    class: 'link-body-emphasis link-underline-opacity-0 link-primary-hover' %>
   </p>
-  <p> <%= pull_request.user.login %> </p>
+  <p class="fs-7">
+    <i class="bi bi-chat-left"></i> <%= pull_request.comments %>
+    <%= render partial: 'label', collection: pull_request.labels %>
+  </p>
 </div>

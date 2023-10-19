@@ -1,3 +1,7 @@
-<div>
-  <%= render partial: 'pr_list', locals: { title: 'My Pull Requests' } %>
+<div class="row row-cols-2">
+  <% @pull_requests.each do |title, pull_requests| %>
+    <div class="col">
+      <%= render partial: 'pr_list', locals: { title: title, pull_requests: pull_requests } %>
+    </div>
+  <% end %>
 </div>
