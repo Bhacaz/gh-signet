@@ -4,7 +4,8 @@ class CreatePrSignets < ActiveRecord::Migration[7.1]
       t.string :query
       t.references :user, null: false, foreign_key: true
       t.string :title
-      t.string :order
+      t.integer :sort, default: 0, limit: 1, null: false
+      t.integer :order, default: 0, limit: 1, null: false
 
       t.timestamps
     end

@@ -1,5 +1,24 @@
 <%= form_with(model: pr_signet) do |form| %>
-  <%= render 'show_errors', locals: { record: pr_signet } %>
+  <%= render 'show_errors', record: pr_signet %>
 
+  <div class="container my-3">
+    <%= form.label :title, class: 'form-label' %>
+    <%= form.text_field :title, class: 'form-control' %>
+  </div>
 
+  <div class="container my-3">
+    <%= form.label :query, class: 'form-label' %>
+    <%= form.text_field :query, class: 'form-control' %>
+  </div>
+
+  <div class="container my-3">
+    <%= form.label :sort, class: 'form-label' %>
+    <%= form.select :sort, PrSignet.sorts.keys.map { |sort| [sort.capitalize, sort] }, class: 'form-select' %>
+    <%= form.label :order, class: 'form-label' %>
+    <%= form.select :order, PrSignet.orders.keys.map { |order| [order.capitalize, order] }, class: 'form-select' %>
+  </div>
+
+  <div class="container mt-3">
+    <%= form.submit 'Create Signet', class: 'btn btn-primary' %>
+  </div>
 <% end %>
