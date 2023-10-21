@@ -1,29 +1,49 @@
-<%= form_with(model: pr_signet) do |form| %>
-  <%= render 'show_errors', record: pr_signet %>
+<div data-controller="pr-signet-form">
+  <%= form_with(model: pr_signet) do |form| %>
+    <%= render 'show_errors', record: pr_signet %>
 
-  <div class="container my-3">
-    <%= form.label :title, class: 'form-label' %>
-    <%= form.text_field :title, class: 'form-control' %>
-  </div>
+    <div class="container my-3">
+      <%= form.label :title, class: 'form-label' %>
+      <%= form.text_field :title, class: 'form-control' %>
+    </div>
 
-  <div class="container my-3">
-    <%= form.label :query, class: 'form-label' do %>
-    Query (<a target="_blank" href="https://docs.github.com/en/search-github/searching-on-github/searching-issues-and-pull-requests">doc</a>)
+    <div class="container my-3">
+      <%= form.label :query, class: 'form-label' do %>
+        Query (<a target="_blank" href="https://docs.github.com/en/search-github/searching-on-github/searching-issues-and-pull-requests">doc</a>)
+      <% end %>
+      <div class="row justify-content-between">
+        <div class="col">
+          <%= form.text_field :query, class: 'form-control', data: { 'pr-signet-form-target' => 'query' } %>
+        </div>
+        <div class="col-1 fs-5 my-1">
+          <i class="bi bi-star-fill text-warning-emphasis"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="container my-3">
+      <%= form.label :sort, class: 'form-label' %>
+      <%= form.select :sort, PrSignet.sorts.keys.map { |sort| [sort.capitalize, sort] }, class: 'form-select' %>
+      <%= form.label :order, class: 'form-label' %>
+      <%= form.select :order, PrSignet.orders.keys.map { |order| [order.capitalize, order] }, class: 'form-select' %>
+    </div>
+
+    <div class="container mt-3">
+      <%= form.submit 'Confirm', class: 'btn btn-primary' %>
+      <%= form.submit 'Preview', name: :preview, class: "btn btn-secondary" %>
+    </div>
+  <% end %>
+
+  <%= turbo_frame_tag :new_signet_preview %>
+
+  <div class="container pt-3">
+    <% PrQueryLibrary::LIBRARY.each do |query| %>
+      <p>
+        <%= link_to 'javascript:void(0)', class: "link-body-emphasis link-underline-opacity-0", data: { action: 'pr-signet-form#useThisStartQuery' } do %>
+          <i class="bi bi-check-square"></i> <%= query %>
+          <% end %>
+        </a>
+      </p>
     <% end %>
-    <%= form.text_field :query, class: 'form-control' %>
   </div>
-
-  <div class="container my-3">
-    <%= form.label :sort, class: 'form-label' %>
-    <%= form.select :sort, PrSignet.sorts.keys.map { |sort| [sort.capitalize, sort] }, class: 'form-select' %>
-    <%= form.label :order, class: 'form-label' %>
-    <%= form.select :order, PrSignet.orders.keys.map { |order| [order.capitalize, order] }, class: 'form-select' %>
-  </div>
-
-  <div class="container mt-3">
-    <%= form.submit 'Confirm', class: 'btn btn-primary' %>
-    <%= form.submit 'Preview', name: :preview, class: "btn btn-secondary" %>
-  </div>
-<% end %>
-
-<%= turbo_frame_tag :new_signet_preview %>
+</div>
