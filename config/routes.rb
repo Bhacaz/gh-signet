@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'auth/:provider/callback', to: 'login#create'
   resources :pr_signets do
     get :gh_pull_requests, on: :member
+    get :preview, on: :collection
   end
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

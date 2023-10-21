@@ -7,7 +7,9 @@
   </div>
 
   <div class="container my-3">
-    <%= form.label :query, class: 'form-label' %>
+    <%= form.label :query, class: 'form-label' do %>
+    Query (<a target="_blank" href="https://docs.github.com/en/search-github/searching-on-github/searching-issues-and-pull-requests">doc</a>)
+    <% end %>
     <%= form.text_field :query, class: 'form-control' %>
   </div>
 
@@ -20,5 +22,8 @@
 
   <div class="container mt-3">
     <%= form.submit 'Confirm', class: 'btn btn-primary' %>
+    <%= form.submit 'Preview', name: :preview, class: "btn btn-secondary" %>
   </div>
 <% end %>
+
+<%= turbo_frame_tag :new_signet_preview %>

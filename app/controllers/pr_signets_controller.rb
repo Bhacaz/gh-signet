@@ -10,6 +10,12 @@ class PrSignetsController < ApplicationController
 
   def create
     @pr_signet = PrSignet.new(user: auth_user, **pr_signet_params)
+
+    if params[:preview]
+      show_preview
+      return
+    end
+
     if @pr_signet.save
       redirect_to action: :index
     else
@@ -31,13 +37,17 @@ class PrSignetsController < ApplicationController
   def destroy
     @pr_signet.destroy
     respond_to do |format|
-      format.turbo_stream { render turbo_stream: turbo_stream.remove(@pr_signet) }
+      format.turbo_stream
       format.html { redirect_to action: :index }
     end
   end
 
   def gh_pull_requests
-    @pr_signet.gh_pull_requests
+  end
+
+  def preview
+    @pr_signet = PrSignet.new(user: auth_user, **pr_signet_params)
+    render turbo_stream: turbo_stream.replace(:preview, partial: 'pr_signets/preview')
   end
 
   private
@@ -48,5 +58,11 @@ class PrSignetsController < ApplicationController
 
   def set_record
     @pr_signet = PrSignet.find(params[:id])
+  end
+
+  def show_preview
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.replace(:new_signet_preview, partial: 'pr_signets/preview') }
+    end
   end
 end
