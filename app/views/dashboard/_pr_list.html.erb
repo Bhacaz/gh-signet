@@ -1,4 +1,14 @@
 <div class="container mt-4">
-  <h4 class="pr-list-title-border-bottom"> <%= title %> </h4>
-  <%= render partial: 'pull_request', collection: pull_requests %>
+  <h4 class="pr-list-title-border-bottom"> <%= signet.title %> </h4>
+  <%= turbo_frame_tag(
+        dom_id(signet, :gh_pull_requests),
+        loading: :lazy,
+        src: gh_pull_requests_pr_signet_path(signet)) do %>
+    <p class="card-text placeholder-glow">
+      <span class="placeholder col-7"></span>
+      <span class="placeholder col-4"></span>
+      <span class="placeholder col-12"></span>
+      <span class="placeholder col-4"></span>
+    </p>
+  <% end %>
 </div>

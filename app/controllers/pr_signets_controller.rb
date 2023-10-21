@@ -1,5 +1,5 @@
 class PrSignetsController < ApplicationController
-  before_action :set_record, only: %i[edit update destroy]
+  before_action :set_record, only: %i[edit update destroy gh_pull_requests]
   def index
     @pr_signets = auth_user.pr_signets
   end
@@ -34,6 +34,10 @@ class PrSignetsController < ApplicationController
       format.turbo_stream { render turbo_stream: turbo_stream.remove(@pr_signet) }
       format.html { redirect_to action: :index }
     end
+  end
+
+  def gh_pull_requests
+    @pr_signet.gh_pull_requests
   end
 
   private

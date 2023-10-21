@@ -18,4 +18,8 @@ class PrSignet < ApplicationRecord
   validates :title, presence: true
   validates :sort, presence: true
   validates :order, presence: true
+
+  def gh_pull_requests
+    user.octokit.search_issues(query, sort => order).items
+  end
 end

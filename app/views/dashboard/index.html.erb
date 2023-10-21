@@ -1,11 +1,8 @@
 <div class="row">
-  <% @pull_requests.each_slice(2) do |slice| %>
+  <% @pr_signets.each_slice(2) do |signets| %>
     <div class="col-6" style="min-width: 30em">
-<!--      Very weird slice.each behaviour, should return an array of hashes-->
-      <% slice.each do |pull_requests_hash| %>
-        <% pull_requests_hash.each do |title, pull_requests| %>
-          <%= render partial: 'pr_list', locals: { title: title, pull_requests: pull_requests } %>
-        <% end %>
+      <% signets.each do |signet| %>
+        <%= render partial: 'pr_list', locals: { signet: signet } %>
       <% end %>
     </div>
   <% end %>
