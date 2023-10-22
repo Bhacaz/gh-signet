@@ -25,7 +25,7 @@ class PrSignet < ApplicationRecord
 
   def display_order_maximum
     size = user.pr_signets.size
-    size + 1 if new_record?
+    size += 1 if new_record?
 
     if display_order > size
       errors.add(:display_order, "must be less than or equal to #{size} (number of Signets). Current value: #{display_order}")
@@ -45,7 +45,6 @@ class PrSignet < ApplicationRecord
   end
 
   def reorder_display_order
-    pp PrSignet.where(user_id: user_id).pluck(:display_order)
     PrSignet.where(user_id: user_id).where("display_order >= ?", display_order).update_all("display_order = display_order + 1")
   end
 end
