@@ -17,8 +17,18 @@
               <i class="bi bi-bookmark-plus fs-4"></i>
             <% end %>
           </li>
-          <li class="nav-item ml-2">
-            <%= image_tag auth_user.avatar_url, class: "mg-thumbnail rounded-circle p-1", height: 40 %>
+          <li class="nav-item ml-2 dropdown">
+            <a class="nav-link p-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <%= image_tag auth_user.avatar_url, class: "mg-thumbnail rounded-circle p-1", height: 40 %>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li>
+                <%= link_to 'Logout', logout_path, class: 'dropdown-item' %>
+              </li>
+              <li><a class="dropdown-item" href="#">...</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item text-danger" href="#">Delete account</a></li>
+            </ul>
           </li>
         </ul>
       </div>

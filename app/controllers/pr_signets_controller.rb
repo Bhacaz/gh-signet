@@ -45,7 +45,7 @@ class PrSignetsController < ApplicationController
     respond_to do |format|
       format.turbo_stream
       format.html { redirect_to action: :index }
-    end
+    end 
   end
 
   def gh_pull_requests

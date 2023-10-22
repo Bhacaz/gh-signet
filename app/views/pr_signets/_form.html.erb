@@ -4,7 +4,7 @@
 
     <div class="container my-3">
       <%= form.label :title, class: 'form-label' %>
-      <%= form.text_field :title, class: 'form-control' %>
+      <%= form.text_field :title, class: 'form-control', required: true %>
     </div>
 
     <div class="container my-3">
@@ -14,7 +14,7 @@
       <% end %>
       <div class="row justify-content-between">
         <div class="col">
-          <%= form.text_field :query, class: 'form-control', data: { 'pr-signet-form-target' => 'query' } %>
+          <%= form.text_field :query, class: 'form-control', required: true, data: { 'pr-signet-form-target' => 'query' } %>
         </div>
         <div class="col-1 fs-5 my-1">
           <a data-action="pr-signet-form#showLibraryModal">

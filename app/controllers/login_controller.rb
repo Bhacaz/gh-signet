@@ -1,4 +1,5 @@
 class LoginController < ApplicationController
+  skip_before_action :require_auth_user, only: %i[create]
   def create
     auth = request.env['omniauth.auth']
 
@@ -12,5 +13,11 @@ class LoginController < ApplicationController
     session[:user_id] = user.id
 
     redirect_to dashboard_path
+  end
+
+  def logout
+    auth_user.update! gho_token: nil
+    session[:user_id] = nil
+    redirect_to root_path
   end
 end

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   get 'dashboard', to: 'dashboard#index'
   get 'auth/:provider/callback', to: 'login#create'
+  get 'logout', to: 'login#logout'
   resources :pr_signets do
     get :gh_pull_requests, on: :member
     get :preview, on: :collection
