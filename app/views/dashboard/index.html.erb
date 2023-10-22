@@ -1,9 +1,6 @@
-<div class="row">
-  <% @pr_signets.each_slice(2) do |signets| %>
-    <div class="col-6" style="min-width: 30em">
-      <% signets.each do |signet| %>
+<%= javascript_import_module_tag 'masonry' %>
+<div id="dashboard-masonry" data-masonry='{"percentPosition": true }' class="row">
+  <% @pr_signets.each do |signet| %>
         <%= render partial: 'pr_list', locals: { signet: signet } %>
-      <% end %>
-    </div>
   <% end %>
 </div>

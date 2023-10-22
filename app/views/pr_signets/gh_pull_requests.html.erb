@@ -1,5 +1,7 @@
 <%= turbo_frame_tag dom_id(@pr_signet, :gh_pull_requests) do  %>
-  <% @pr_signet.gh_pull_requests.each do |pull_request| %>
-    <%= render partial: 'pull_request', locals: { pull_request: pull_request } %>
-  <% end %>
+  <div data-controller="pull-requests">
+    <% @pr_signet.gh_pull_requests.each do |pull_request| %>
+      <%= render partial: 'pull_request', locals: { pull_request: pull_request } %>
+    <% end %>
+  </div>
 <% end %>
