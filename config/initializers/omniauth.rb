@@ -1,4 +1,6 @@
-# OmniAuth::AuthenticityTokenProtection.default_options(key: "csrf.token", authenticity_param: "_csrf")
+# Skip initialization if we don't have the credentials yet
+# like assets:precompile step
+return unless Rails.application.credentials.github
 
 Rails.application.config.middleware.use OmniAuth::Builder do
   provider :github,
