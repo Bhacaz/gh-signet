@@ -27,7 +27,13 @@ class PrSignetsController < ApplicationController
   end
 
   def update
-    if @pr_signet.update(pr_signet_params)
+    @pr_signet.assign_attributes(pr_signet_params)
+    if params[:preview]
+      show_preview
+      return
+    end
+
+    if @pr_signet.save
       redirect_to action: :index
     else
       render :edit
