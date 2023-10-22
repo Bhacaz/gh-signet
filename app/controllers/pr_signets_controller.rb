@@ -1,11 +1,11 @@
 class PrSignetsController < ApplicationController
   before_action :set_record, only: %i[edit update destroy gh_pull_requests]
   def index
-    @pr_signets = auth_user.pr_signets
+    @pr_signets = auth_user.pr_signets.order(:display_order)
   end
 
   def new
-    @pr_signet = PrSignet.new
+    @pr_signet = PrSignet.new(user: auth_user)
   end
 
   def create
@@ -19,6 +19,7 @@ class PrSignetsController < ApplicationController
     if @pr_signet.save
       redirect_to action: :index
     else
+      flash[:error] = @pr_signet.errors.full_messages.join(', ')
       render :new
     end
   end
@@ -36,6 +37,7 @@ class PrSignetsController < ApplicationController
     if @pr_signet.save
       redirect_to action: :index
     else
+      flash[:error] = @pr_signet.errors.full_messages.join(', ')
       render :edit
     end
   end
@@ -59,7 +61,7 @@ class PrSignetsController < ApplicationController
   private
 
   def pr_signet_params
-    params.require(:pr_signet).permit(:query, :title, :sort, :order)
+    params.require(:pr_signet).permit(:query, :title, :sort, :order, :display_order)
   end
 
   def set_record

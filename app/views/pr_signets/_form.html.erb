@@ -1,7 +1,5 @@
 <div data-controller="pr-signet-form">
   <%= form_with(model: pr_signet) do |form| %>
-    <%= render 'show_errors', record: pr_signet %>
-
     <div class="container my-3">
       <%= form.label :title, class: 'form-label' %>
       <%= form.text_field :title, class: 'form-control', required: true %>
@@ -31,11 +29,17 @@
       <%= form.select :order, PrSignet.orders.keys.map { |order| [order.capitalize, order] }, class: 'form-select' %>
     </div>
 
+    <div class="container my-3">
+      <%= form.label :display_order, class: 'form-label' %>
+      <%= form.number_field :display_order, required: true %>
+    </div>
+
     <div class="container mt-3">
       <%= form.submit 'Confirm', class: 'btn btn-primary' %>
       <%= form.submit 'Preview', name: :preview, class: "btn btn-secondary" %>
     </div>
-  <% end %>
+    <%= render partial: 'show_errors' %>
+<% end %>
 
   <%= turbo_frame_tag :new_signet_preview %>
 
