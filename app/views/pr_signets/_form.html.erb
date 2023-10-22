@@ -9,14 +9,17 @@
 
     <div class="container my-3">
       <%= form.label :query, class: 'form-label' do %>
-        Query (<a target="_blank" href="https://docs.github.com/en/search-github/searching-on-github/searching-issues-and-pull-requests">doc</a>)
+        Query
+        (<a target="_blank" href="https://docs.github.com/en/search-github/searching-on-github/searching-issues-and-pull-requests">doc</a>)
       <% end %>
       <div class="row justify-content-between">
         <div class="col">
           <%= form.text_field :query, class: 'form-control', data: { 'pr-signet-form-target' => 'query' } %>
         </div>
         <div class="col-1 fs-5 my-1">
-          <i class="bi bi-star-fill text-warning-emphasis"></i>
+          <a data-action="pr-signet-form#showLibraryModal">
+            <i class="bi bi-star-fill text-warning-emphasis"></i>
+          </a>
         </div>
       </div>
     </div>
@@ -36,14 +39,25 @@
 
   <%= turbo_frame_tag :new_signet_preview %>
 
-  <div class="container pt-3">
-    <% PrQueryLibrary::LIBRARY.each do |query| %>
-      <p>
-        <%= link_to 'javascript:void(0)', class: "link-body-emphasis link-underline-opacity-0", data: { action: 'pr-signet-form#useThisStartQuery' } do %>
-          <i class="bi bi-check-square"></i> <%= query %>
-          <% end %>
-        </a>
-      </p>
-    <% end %>
+  <div class="modal" id="library-query-modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="container pt-3">
+            <% PrQueryLibrary::LIBRARY.each do |name, query| %>
+              <p>
+              <p class="mb-1"><%= name %></p>
+              <%= link_to 'javascript:void(0)',
+                          class: "link-body-emphasis link-underline-opacity-0",
+                          data: { action: 'pr-signet-form#useThisStartQuery' } do %>
+                <i class="bi bi-check-square"></i> <%= query %>
+              <% end %>
+              </a>
+              </p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

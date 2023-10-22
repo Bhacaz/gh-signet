@@ -1,4 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
+
 export default class extends Controller {
     static targets = [ "query" ]
 
@@ -8,9 +9,21 @@ export default class extends Controller {
     useThisStartQuery(event) {
         let value = event.target.innerText
         value = value.trim()
-        console.log(value)
-        // set the value to the query target
         this.queryTarget.value = value
-        console.log(this.queryTarget)
+        document.getElementById('library-query-modal').style.display = 'none';
+        document.getElementsByClassName('modal-backdrop')[0].remove()
+    }
+
+    showLibraryModal() {
+        this.libraryQueryModal().show()
+    }
+
+    hidePreviewModal() {
+        document.getElementById('modal-preview').style.display = 'none';
+        document.getElementsByClassName('modal-backdrop')[0].remove();
+    }
+
+    libraryQueryModal() {
+        return new bootstrap.Modal('#library-query-modal')
     }
 }
