@@ -25,9 +25,13 @@
               <li>
                 <%= link_to 'Logout', logout_path, class: 'dropdown-item' %>
               </li>
-              <li><a class="dropdown-item" href="#">...</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item text-danger" href="#">Delete account</a></li>
+              <li>
+                <%= link_to 'Delete account',
+                            user_path,
+                            class: 'dropdown-item text-danger',
+                            data: { turbo_confirm: 'Deleting account. Are you sure?', turbo_method: :delete } %>
+              </li>
             </ul>
           </li>
         </ul>

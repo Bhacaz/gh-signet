@@ -6,7 +6,9 @@ class ApplicationController < ActionController::Base
   end
 
   def auth_user
-    @auth_user ||= User.find_by(id: session[:user_id])
+    return @auth_user if defined? @auth_user
+
+    @auth_user = session[:user_id] ? User.find_by(id: session[:user_id]) : nil
   end
 
   helper_method :auth_user
