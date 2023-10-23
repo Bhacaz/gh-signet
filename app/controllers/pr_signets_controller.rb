@@ -78,5 +78,3 @@ class PrSignetsController < ApplicationController
     end
   end
 end
-# 1-579-960-3020
-# 
