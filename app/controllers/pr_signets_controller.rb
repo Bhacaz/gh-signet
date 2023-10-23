@@ -19,8 +19,10 @@ class PrSignetsController < ApplicationController
     if @pr_signet.save
       redirect_to action: :index
     else
-      flash[:error] = @pr_signet.errors.full_messages.join(', ')
-      render :new
+      respond_to do |format|
+        format.turbo_stream { render turbo_stream: turbo_stream.replace([@pr_signet, :show_errors], partial: 'show_errors', locals: { record: @pr_signet }) }
+        format.html { render :new }
+      end
     end
   end
 
@@ -37,8 +39,10 @@ class PrSignetsController < ApplicationController
     if @pr_signet.save
       redirect_to action: :index
     else
-      flash[:error] = @pr_signet.errors.full_messages.join(', ')
-      render :edit
+      respond_to do |format|
+        format.turbo_stream { render turbo_stream: turbo_stream.replace([@pr_signet, :show_errors], partial: 'show_errors', locals: { record: @pr_signet }) }
+        format.html { render :edit }
+      end
     end
   end
 
@@ -74,3 +78,5 @@ class PrSignetsController < ApplicationController
     end
   end
 end
+# 1-579-960-3020
+# 

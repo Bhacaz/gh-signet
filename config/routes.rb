@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :admins
   root "home#index"
 
   get 'dashboard', to: 'dashboard#index'

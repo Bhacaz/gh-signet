@@ -16,7 +16,7 @@
         </div>
         <div class="col-1 fs-5 my-1">
           <a data-action="pr-signet-form#showLibraryModal">
-            <i class="bi bi-star-fill text-warning-emphasis"></i>
+            <i class="bi bi-star-fill text-warning"></i>
           </a>
         </div>
       </div>
@@ -38,7 +38,7 @@
       <%= form.submit 'Confirm', class: 'btn btn-primary' %>
       <%= form.submit 'Preview', name: :preview, class: "btn btn-secondary" %>
     </div>
-    <%= render partial: 'show_errors' %>
+    <%= turbo_frame_tag dom_id(@pr_signet, :show_errors) %>
 <% end %>
 
   <%= turbo_frame_tag :new_signet_preview %>

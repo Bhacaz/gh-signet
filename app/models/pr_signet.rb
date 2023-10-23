@@ -34,7 +34,7 @@ class PrSignet < ApplicationRecord
 
   after_initialize do
     if new_record?
-      self.display_order = user.pr_signets.maximum(:display_order).to_i + 1
+      self.display_order ||= user.pr_signets.maximum(:display_order).to_i + 1
     end
   end
 

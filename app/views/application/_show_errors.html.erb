@@ -1,7 +1,7 @@
-<% if flash[:error] %>
-  <div class="text-danger container pt-2">
-    <p>
-      <%= flash[:error] %>
-    </p>
+<%= turbo_frame_tag dom_id(record, :show_errors) do %>
+  <div class="container mt-4 text-danger">
+      <% record.errors.each do |error| %>
+        <p><%= error.full_message %></p>
+      <% end %>
   </div>
 <% end %>

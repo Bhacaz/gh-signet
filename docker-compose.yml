@@ -1,21 +1,11 @@
 
 volumes:
-    redis_data:
-    app_storage:
+  redis_data:
 
 services:
-  app:
-    build: .
-    ports:
-      - 3000:3000
-    depends_on:
-      - redis
-    volumes:
-      - app_storage:/rails/storage
-    environment:
-      - REDIS_URL=http://redis:6379
-      - RAILS_MASTER_KEY=123
   redis:
     image: redis:alpine
+    ports:
+      - 6379:6379
     volumes:
       - redis_data:/data
