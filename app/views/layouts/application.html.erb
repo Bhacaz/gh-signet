@@ -9,6 +9,10 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <%= hotwire_livereload_tags if Rails.env.development? %>
+
+    <% if Rails.env.production? %>
+      <script async defer data-website-id="a82af86d-9eb1-48be-9314-60c80aeb09d7" src="https://umami.bhacaz.com/umami.js"></script>
+    <% end %>
   </head>
 
   <body>
