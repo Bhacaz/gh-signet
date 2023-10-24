@@ -5,12 +5,12 @@ class PrSignetsController < ApplicationController
   end
 
   def new
-    @pr_signet = PrSignet.new(user: auth_user)
-    @pr_signet.display_order = auth_user.pr_signets.size + 1
+    @pr_signet = auth_user.pr_signets.build
+    @pr_signet.display_order = auth_user.pr_signets.size
   end
 
   def create
-    @pr_signet = PrSignet.new(user: auth_user, **pr_signet_params)
+    @pr_signet = auth_user.pr_signets.build(pr_signet_params)
 
     if params[:preview]
       show_preview
@@ -69,7 +69,7 @@ class PrSignetsController < ApplicationController
   end
 
   def set_record
-    @pr_signet = PrSignet.find(params[:id])
+    @pr_signet = auth_user.pr_signets.find(params[:id])
   end
 
   def show_preview
