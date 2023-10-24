@@ -6,6 +6,7 @@ class PrSignetsController < ApplicationController
 
   def new
     @pr_signet = PrSignet.new(user: auth_user)
+    @pr_signet.display_order = auth_user.pr_signets.size + 1
   end
 
   def create
@@ -20,7 +21,7 @@ class PrSignetsController < ApplicationController
       redirect_to action: :index
     else
       respond_to do |format|
-        format.turbo_stream { render turbo_stream: turbo_stream.replace([@pr_signet, :show_errors], partial: 'show_errors', locals: { record: @pr_signet }) }
+        format.turbo_stream { render turbo_stream_errors(@pr_signet) }
         format.html { render :new }
       end
     end
@@ -40,7 +41,7 @@ class PrSignetsController < ApplicationController
       redirect_to action: :index
     else
       respond_to do |format|
-        format.turbo_stream { render turbo_stream: turbo_stream.replace([@pr_signet, :show_errors], partial: 'show_errors', locals: { record: @pr_signet }) }
+        format.turbo_stream { render turbo_stream_errors(@pr_signet) }
         format.html { render :edit }
       end
     end
@@ -58,7 +59,6 @@ class PrSignetsController < ApplicationController
   end
 
   def preview
-    @pr_signet = PrSignet.new(user: auth_user, **pr_signet_params)
     render turbo_stream: turbo_stream.replace(:preview, partial: 'pr_signets/preview')
   end
 

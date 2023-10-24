@@ -23,28 +23,33 @@ class PrSignet < ApplicationRecord
   validates :display_order, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
   validate :display_order_maximum
 
-  def display_order_maximum
-    size = user.pr_signets.size
-    size += 1 if new_record?
-
-    if display_order > size
-      errors.add(:display_order, "must be less than or equal to #{size} (number of Signets). Current value: #{display_order}")
-    end
-  end
-
-  after_initialize do
-    if new_record?
-      self.display_order ||= user.pr_signets.maximum(:display_order).to_i + 1
-    end
-  end
-
-  before_save :reorder_display_order, if: :display_order_changed?
+  after_save :reorder_other_display_order
+  after_destroy :reorder_other_display_order
 
   def gh_pull_requests
     user.octokit.search_issues(query, sort => order).items
   end
 
-  def reorder_display_order
-    PrSignet.where(user_id: user_id).where("display_order >= ?", display_order).update_all("display_order = display_order + 1")
+  private
+
+  def display_order_maximum
+    size = user.pr_signets.size
+    size += 1 if new_record?
+
+    if display_order > size
+      errors.add(:display_order, "must be less than or equal to #{size} (number of Signets).")
+    end
+  end
+
+  def reorder_other_display_order
+    to_save =
+    PrSignet
+      .where(user_id: user_id)
+      .order(display_order: :asc, updated_at: :desc)
+      .each_with_index.map do |pr_signet, index|
+        pr_signet.display_order = index + 1
+        pr_signet
+    end
+    PrSignet.upsert_all to_save.map(&:attributes)
   end
 end

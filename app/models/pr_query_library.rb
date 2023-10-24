@@ -5,7 +5,7 @@
 module PrQueryLibrary
   MY_PR_QUERY = 'is:pr is:open author:@me'
   ASSIGN_TO_ME_QUERY = 'is:pr is:open assignee:@me'
-  REVIEW_REQUESTED_QUERY = 'is:pr is:open review-requested:@me state:open type:pullrequests'
+  REVIEW_REQUESTED_QUERY = 'is:pr is:open review-requested:@me state:open'
 
   LIBRARY = [
     ['My pullrequets', MY_PR_QUERY],

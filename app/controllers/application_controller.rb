@@ -11,5 +11,9 @@ class ApplicationController < ActionController::Base
     @auth_user = session[:user_id] ? User.find_by(id: session[:user_id]) : nil
   end
 
+  def turbo_stream_errors(record)
+    { turbo_stream: turbo_stream.replace([record, :show_errors], partial: 'show_errors', locals: { record: record }) }
+  end
+
   helper_method :auth_user
 end
