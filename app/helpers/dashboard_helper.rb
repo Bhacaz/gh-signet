@@ -4,7 +4,17 @@ module DashboardHelper
 
     pull_request_url = pull_request.pull_request.html_url
     elements = pull_request_url.split('/').last(4)
-    elements[0] + '/' + elements[1] + '#' + elements[3]
+    {
+      repo: elements[0] + '/' + elements[1],
+      number: elements[3]
+    }
+  end
+
+  def pull_request_ref_string(pull_request)
+    ref = pull_request_ref(pull_request)
+    return '' if ref.empty?
+
+    "#{ref[:repo]}##{ref[:number]}"
   end
 
   def text_color_contrast(hex_color)
