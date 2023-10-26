@@ -3,9 +3,6 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
     static targets = [ "query" ]
 
-    connect() {
-        console.log(this.queryTarget)
-    }
     useThisStartQuery(event) {
         let value = event.target.innerText
         value = value.trim()

@@ -1,18 +1,13 @@
 <div class="container py-1">
   <div class="ref-and-time-ago text-body-secondary pb-1">
-      <%= link_to pull_request.pull_request&.html_url,
-                  target: '_blank',
-                  class: ('link-underline link-underline-opacity-0 ' + (pull_request.draft ? 'link-body-emphasis' : 'link-primary')) do %>
-       <i class="bi bi-box-arrow-up-right"></i>
-        <%= pull_request_ref_string(pull_request) %>
-      <% end %>
+      <%= render partial: 'pull_requests/external_link', locals: { pull_request: pull_request } %>
       - <%= time_ago_in_words pull_request.updated_at %>
   </div>
 
   <p class="mb-1">
     <%=  link_to pull_request.title,
-                 pull_request_details_path(pull_request_ref(pull_request)),
-                 data: { turbo_stream: '' },
+                 pull_request_details_path(pull_request_ref(pull_request.pull_request)),
+                 data: { turbo_stream: '', action: 'pull-requests#toggleOffcanvas' },
                  class: 'link-body-emphasis link-underline-opacity-0 link-primary-hover' %>
   </p>
   <p class="fs-7">
