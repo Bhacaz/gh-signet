@@ -11,6 +11,9 @@
         <%= link_to @pull_request.user.login, @pull_request.user.html_url, class: "link-underline link-underline-opacity-0" %>
       </p>
       <p>
+        <%= render partial: 'pull_requests/label', collection: @pull_request.labels %>
+      </p>
+      <p>
         <%= @pull_request.base.ref %> <i class="bi bi-arrow-left-short"></i> <%= @pull_request.head.ref %>
       </p>
       <p>
@@ -24,7 +27,11 @@
         <i class="bi bi-files"></i> <%= @pull_request.changed_files %>
       </p>
       <p>
-        <%= @pull_request.body %>
+        <ul class="list-group">
+          <% @statuses.each do |status| %>
+            <%= render partial: 'pull_requests/commit_status', locals: { status: status } %>
+          <% end %>
+        </ul>
       </p>
     </div>
 <% end %>

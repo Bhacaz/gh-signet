@@ -1,0 +1,24 @@
+<li class="list-group-item">
+  <div class="row">
+    <div class="col col-2 my-auto">
+      <% if status.conclusion == 'success' %>
+        <span class="text-success-emphasis">
+          <i class="bi bi-check2"></i>
+        </span>
+        <% elsif status.conclusion == 'pending' %>
+          <span class="text-warning-emphasis">
+            <i class="bi bi-circle-fill"></i>
+          </span>
+      <% else %>
+          <span class="text-danger-emphasis">
+            <i class="bi bi-x-lg"></i>
+          </span>
+      <% end %>
+      <%= image_tag status.avatar_url, class: "mg-thumbnail rounded-circle p-1", height: 40 %>
+    </div>
+    <div class="col my-auto">
+      <%= link_to status.name, status.target_url %>
+      <%= status.description.present? ? ' - ' + status.description : '' %>
+    </div>
+  </div>
+</li>

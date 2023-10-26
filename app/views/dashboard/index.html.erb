@@ -5,7 +5,7 @@
   <% end %>
 </div>
 
-<div id="offcanvas-pull-request-details" class="offcanvas offcanvas-end" tabindex="-1" aria-labelledby="offcanvasRightLabel" aria-modal="true" role="dialog">
+<div id="offcanvas-pull-request-details" class="offcanvas offcanvas-end" style="overflow: auto" tabindex="-1" aria-labelledby="offcanvasRightLabel" aria-modal="true" role="dialog">
   <%= turbo_frame_tag :pull_request_details_panel do %>
     <div class="offcanvas-header">
       <h6 class="offcanvas-title" id="offcanvasRightLabel">Loading...</h6>
