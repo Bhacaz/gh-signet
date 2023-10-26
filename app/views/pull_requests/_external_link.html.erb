@@ -1,4 +1,4 @@
-<%= link_to pull_request.pull_request&.html_url,
+<%= link_to pull_request&.html_url,
             target: '_blank',
             class: ('link-underline link-underline-opacity-0 ' + (pull_request.draft ? 'link-body-emphasis' : 'link-primary')) do %>
   <i class="bi bi-box-arrow-up-right"></i>
