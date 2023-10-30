@@ -17,7 +17,7 @@
       <%= image_tag status.avatar_url, class: "mg-thumbnail rounded-circle p-1", height: 40 %>
     </div>
     <div class="col my-auto">
-      <%= link_to status.name, status.target_url %>
+      <%= link_to status.name, status.target_url, target: '_blank' %>
       <%= status.description.present? ? ' - ' + status.description : '' %>
     </div>
   </div>
