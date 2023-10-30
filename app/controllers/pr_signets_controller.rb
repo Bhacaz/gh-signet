@@ -20,10 +20,7 @@ class PrSignetsController < ApplicationController
     if @pr_signet.save
       redirect_to action: :index
     else
-      respond_to do |format|
-        format.turbo_stream { render turbo_stream_errors(@pr_signet) }
-        format.html { render :new }
-      end
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -40,10 +37,7 @@ class PrSignetsController < ApplicationController
     if @pr_signet.save
       redirect_to action: :index
     else
-      respond_to do |format|
-        format.turbo_stream { render turbo_stream_errors(@pr_signet) }
-        format.html { render :edit }
-      end
+      render :edit, status: :unprocessable_entity
     end
   end
 

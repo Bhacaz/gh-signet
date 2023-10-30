@@ -38,7 +38,10 @@
       <%= form.submit 'Confirm', class: 'btn btn-primary' %>
       <%= form.submit 'Preview', name: :preview, class: "btn btn-secondary" %>
     </div>
-    <%= turbo_frame_tag dom_id(@pr_signet, :show_errors) %>
+<% end %>
+
+<% if @pr_signet.errors.any? %>
+  <%= render partial: 'show_errors', locals: { record: @pr_signet } %>
 <% end %>
 
   <%= turbo_frame_tag :new_signet_preview %>
