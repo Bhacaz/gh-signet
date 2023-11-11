@@ -10,6 +10,11 @@ class PullRequestsController < ApplicationController
     auth_user.octokit.combined_status(params[:repo], sha).statuses.each do |status|
       @statuses << status_to_status(status)
     end
+    render turbo_stream: turbo_stream.replace('offcanvas-pull-request-details-frame', partial: 'pull_requests/offcanvas_details')
+  end
+
+  def show_loading_offcanvas_details
+    render turbo_stream: turbo_stream.after('dashboard-masonry', partial: 'pull_requests/loading_offcanvas_pr_details')
   end
 
   private
@@ -35,5 +40,4 @@ class PullRequestsController < ApplicationController
       check.conclusion
     )
   end
-
 end

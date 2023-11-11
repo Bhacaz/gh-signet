@@ -4,15 +4,3 @@
         <%= render partial: 'pr_list', locals: { signet: signet } %>
   <% end %>
 </div>
-
-<div id="offcanvas-pull-request-details" class="offcanvas offcanvas-end" style="overflow: auto" tabindex="-1" aria-labelledby="offcanvasRightLabel" aria-modal="true" role="dialog">
-  <%= turbo_frame_tag :pull_request_details_panel do %>
-    <div class="offcanvas-header">
-      <h6 class="offcanvas-title" id="offcanvasRightLabel">Loading...</h6>
-    </div>
-    <div class="offcanvas-body">
-
-    </div>
-  <% end %>
-</div>
-<div id="offcanvas-backdrop-pull-request-details" class="offcanvas-backdrop fade d-none" data-controller="pull-requests" data-action="click->pull-requests#toggleOffcanvas"></div>

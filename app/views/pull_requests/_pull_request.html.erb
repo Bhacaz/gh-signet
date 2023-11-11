@@ -6,8 +6,8 @@
 
   <p class="mb-1">
     <%=  link_to pull_request.title,
-                 pull_request_details_path(pull_request_ref(pull_request.pull_request)),
-                 data: { turbo_stream: '', action: 'pull-requests#toggleOffcanvas' },
+                 pull_requests_show_loading_offcanvas_details_path(pull_request_ref(pull_request.pull_request)),
+                 data: { turbo_stream: '' },
                  class: 'link-body-emphasis link-underline-opacity-0 link-primary-hover' %>
   </p>
   <p class="fs-7">
