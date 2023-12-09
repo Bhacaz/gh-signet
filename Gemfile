@@ -70,3 +70,5 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "store_attribute", "~> 1.2"

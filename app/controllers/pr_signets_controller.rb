@@ -1,5 +1,5 @@
 class PrSignetsController < ApplicationController
-  before_action :set_record, only: %i[edit update destroy gh_pull_requests]
+  before_action :set_record, only: %i[edit update destroy gh_pull_requests toggle_expanded preview]
   def index
     @pr_signets = auth_user.pr_signets.order(:display_order)
   end
@@ -50,6 +50,14 @@ class PrSignetsController < ApplicationController
   end
 
   def gh_pull_requests
+  end
+
+  def toggle_expanded
+    @pr_signet.update!(expanded: !@pr_signet.expanded)
+    unless @pr_signet.expanded
+      render :gh_pull_requests, id: @pr_signet.id
+      return
+    end
   end
 
   def preview

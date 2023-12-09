@@ -67,3 +67,7 @@
 .offcanvas {
     --bs-offcanvas-width: 600px;
 }
+
+.pull-request-row:last-child {
+    border-bottom: 0 !important;
+}

@@ -1,6 +1,5 @@
-<%= javascript_import_module_tag 'masonry' %>
-<div id="dashboard-masonry" data-masonry='{"percentPosition": true }' class="row">
+<div id="dashboard-container" class="mt-4">
   <% @pr_signets.each do |signet| %>
-        <%= render partial: 'pr_list', locals: { signet: signet } %>
+    <%= render partial: 'pr_list', locals: { signet: signet } %>
   <% end %>
 </div>

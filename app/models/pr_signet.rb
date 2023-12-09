@@ -14,6 +14,8 @@ class PrSignet < ApplicationRecord
     asc: 1
   }
 
+  store_attribute :display_settings, :expanded, :boolean, default: true
+
   validates :query, presence: true
   validates :title, presence: true
   validates :sort, presence: true
@@ -21,13 +23,13 @@ class PrSignet < ApplicationRecord
   # uniqueness validation on database side. Setting a new pr_signet at position 1 will
   # ask to already update the other pr_signets BEFORE the validation.
   validates :display_order, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
-  validate :display_order_maximum
+  validate :display_order_maximum, if: :display_order_changed?
 
   after_save :reorder_other_display_order
   after_destroy :reorder_other_display_order
 
   def gh_pull_requests
-    user.octokit.search_issues(query, sort => order).items
+    @gh_pull_requests ||= user.octokit.search_issues(query, sort => order).items
   end
 
   private

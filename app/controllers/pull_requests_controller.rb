@@ -14,10 +14,11 @@ class PullRequestsController < ApplicationController
   end
 
   def show_loading_offcanvas_details
-    render turbo_stream: turbo_stream.after('dashboard-masonry', partial: 'pull_requests/loading_offcanvas_pr_details')
+    render turbo_stream: turbo_stream.after('dashboard-container', partial: 'pull_requests/loading_offcanvas_pr_details')
   end
 
   private
+
   Status = Struct.new(:name, :avatar_url, :description, :context, :target_url, :conclusion)
 
   def status_to_status(status)
@@ -30,6 +31,7 @@ class PullRequestsController < ApplicationController
       status.state
     )
   end
+
   def check_to_status(check)
     Status.new(
       check.name,

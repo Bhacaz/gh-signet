@@ -1,17 +1,24 @@
-<div class="container py-1">
-  <div class="ref-and-time-ago text-body-secondary pb-1">
-      <%= render partial: 'pull_requests/external_link', locals: { pull_request: pull_request } %>
-      - <%= time_ago_in_words pull_request.updated_at %>
-  </div>
+<div class="container py-2 border-bottom pull-request-row">
+  <div class="row justify-content-between">
+    <div class="col-8">
+      <p class="mb-1">
+        <%=  link_to pull_request.title,
+                     pull_requests_show_loading_offcanvas_details_path(pull_request_ref(pull_request.pull_request)),
+                     data: { turbo_stream: '' },
+                     class: 'link-body-emphasis link-underline-opacity-0 link-primary-hover' %>
+      </p>
 
-  <p class="mb-1">
-    <%=  link_to pull_request.title,
-                 pull_requests_show_loading_offcanvas_details_path(pull_request_ref(pull_request.pull_request)),
-                 data: { turbo_stream: '' },
-                 class: 'link-body-emphasis link-underline-opacity-0 link-primary-hover' %>
-  </p>
-  <p class="fs-7">
-    <i class="bi bi-chat-left"></i> <%= pull_request.comments %>
-    <%= render partial: 'pull_requests/label', collection: pull_request.labels %>
-  </p>
+      <div class="ref-and-time-ago text-body-secondary pb-1">
+        <%= render partial: 'pull_requests/external_link', locals: { pull_request: pull_request } %>
+        - <%= time_ago_in_words pull_request.updated_at %>
+      </div>
+    </div>
+
+    <div class="col text-end">
+      <p class="fs-7">
+        <%= render partial: 'pull_requests/label', collection: pull_request.labels %>
+        <i class="bi bi-chat-left"></i> <%= pull_request.comments %>
+      </p>
+    </div>
+  </div>
 </div>
