@@ -1,4 +1,4 @@
-<div id="dashboard-container" class="mt-4">
+<div id="dashboard-container" class="mt-4" style="margin-bottom: 4em;">
   <% @pr_signets.each do |signet| %>
     <%= render partial: 'pr_list', locals: { signet: signet } %>
   <% end %>
