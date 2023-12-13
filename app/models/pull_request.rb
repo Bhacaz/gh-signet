@@ -19,7 +19,7 @@ class PullRequest
   end
 
   def statuses
-    Rails.cache.fetch(statuses_cache_key, expires_in: 1.hour) do
+    Rails.cache.fetch(statuses_cache_key, expires_in: 3.hour) do
       sha = pull_request.head.sha
       statuses = []
 
