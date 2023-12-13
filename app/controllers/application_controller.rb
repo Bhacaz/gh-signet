@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   before_action :require_auth_user
 
   def require_auth_user
-    redirect_to root_path unless auth_user
+    redirect_to root_path unless session[:user_id]
   end
 
   def auth_user
