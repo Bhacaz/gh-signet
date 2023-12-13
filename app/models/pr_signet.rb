@@ -29,7 +29,7 @@ class PrSignet < ApplicationRecord
   after_destroy :reorder_other_display_order
 
   def gh_pull_requests
-    @gh_pull_requests ||= pp user.octokit.search_issues(query, sort => order).items
+    @gh_pull_requests ||= user.octokit.search_issues(query, sort => order).items
   end
 
   private
