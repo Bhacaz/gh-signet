@@ -56,7 +56,7 @@ class PrSignetsController < ApplicationController
     @pr_signet.update!(expanded: !@pr_signet.expanded)
     unless @pr_signet.expanded
       render :gh_pull_requests, id: @pr_signet.id
-      return
+      nil
     end
   end
 

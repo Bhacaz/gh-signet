@@ -1,5 +1,10 @@
 <div class="container py-2 border-bottom pull-request-row">
   <div class="row justify-content-between">
+    <div class="col-sm-1 text-center my-auto px-0" style="width: 3em;">
+      <%= link_to pull_request.user.html_url, class: "link-underline link-underline-opacity-0" do %>
+        <%= image_tag pull_request.user.avatar_url, class: "mg-thumbnail rounded-circle p-1", height: 40 %>
+      <% end %>
+    </div>
     <div class="col-8">
       <p class="mb-1">
         <%=  link_to pull_request.title,
@@ -17,7 +22,9 @@
     <div class="col text-end">
       <p class="fs-7">
         <%= render partial: 'pull_requests/label', collection: pull_request.labels %>
-        <i class="bi bi-chat-left"></i> <%= pull_request.comments %>
+        <span class="ps-2">
+          <i class="bi bi-chat-left"></i> <%= pull_request.comments %>
+        </span>
       </p>
     </div>
   </div>
