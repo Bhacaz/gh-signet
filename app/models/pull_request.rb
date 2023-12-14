@@ -7,7 +7,7 @@ class PullRequest
   attr_accessor :user, :repo, :number
 
   def pull_request
-    user.octokit.pull_request(repo, number)
+    @pull_request ||= user.octokit.pull_request(repo, number)
   end
 
   def status_summary
@@ -23,7 +23,9 @@ class PullRequest
       sha = pull_request.head.sha
       statuses = []
 
-      user.octokit.check_runs_for_ref(repo, sha).check_runs.each do |check|
+      checks = user.octokit.check_runs_for_ref(repo, sha).check_runs
+      checks = checks.group_by(&:name).values.map { |checks_by_name| checks_by_name.max_by(&:created_at) }
+      checks.each do |check|
         statuses << check_to_status(check)
       end
 
