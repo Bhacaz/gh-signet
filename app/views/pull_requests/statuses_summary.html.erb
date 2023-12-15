@@ -1,0 +1,15 @@
+<%= turbo_frame_tag "#{pull_request_ref_string(@pull_request)}-statuses-summary" do %>
+  <% if @statuses_summary == 'success' %>
+    <span class="text-success-emphasis">
+          <i class="bi bi-check2"></i>
+        </span>
+  <% elsif @statuses_summary == 'pending' %>
+    <span class="text-warning-emphasis">
+            <i class="bi bi-circle-fill"></i>
+          </span>
+  <% else %>
+    <span class="text-danger-emphasis">
+      <i class="bi bi-x-lg"></i>
+    </span>
+  <% end %>
+<% end %>

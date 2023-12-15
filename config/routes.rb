@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   end
 
   get 'pull_requests/details', to: 'pull_requests#details', as: :pull_request_details
+  get 'pull_requests/statuses_summary', to: 'pull_requests#statuses_summary', as: :pull_request_statuses_summary
   get 'pull_requests/show_loading_offcanvas_details', to: 'pull_requests#show_loading_offcanvas_details'
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
