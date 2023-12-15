@@ -15,12 +15,12 @@
 
       <div class="ref-and-time-ago text-body-secondary pb-1">
         <%= render partial: 'pull_requests/external_link', locals: { pull_request: pull_request } %>
-        <% pr_model = PullRequest.new(user: auth_user, **pull_request_ref(pull_request.pull_request)) %>
-        <% if pr_model.status_summary == 'success' %>
+        <% status_summary = PullRequestStatuses.new(user: auth_user, updated_at: pull_request.updated_at, **pull_request_ref(pull_request.pull_request)).status_summary %>
+        <% if status_summary == 'success' %>
         <span class="text-success-emphasis">
           <i class="bi bi-check2"></i>
         </span>
-        <% elsif pr_model.status_summary == 'pending' %>
+        <% elsif status_summary == 'pending' %>
           <span class="text-warning-emphasis">
             <i class="bi bi-circle-fill"></i>
           </span>

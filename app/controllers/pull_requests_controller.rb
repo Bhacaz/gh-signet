@@ -1,6 +1,6 @@
 class PullRequestsController < ApplicationController
   def details
-    pr = PullRequest.new(user: auth_user, repo: params[:repo], number: params[:number])
+    pr = PullRequestStatuses.new(user: auth_user, repo: params[:repo], number: params[:number])
     @pull_request = pr.pull_request
     @statuses = pr.statuses
     render turbo_stream: turbo_stream.replace('offcanvas-pull-request-details-frame', partial: 'pull_requests/offcanvas_details')

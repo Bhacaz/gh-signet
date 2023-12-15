@@ -1,13 +1,20 @@
 # frozen_string_literal: true
 
-class PullRequest
+class PullRequestStatuses
   include ActiveModel::API
   Status = Struct.new(:name, :avatar_url, :description, :context, :target_url, :conclusion)
 
-  attr_accessor :user, :repo, :number
+  attr_accessor :user, :repo, :number, :updated_at
 
   def pull_request
-    @pull_request ||= user.octokit.pull_request(repo, number)
+    @pull_request ||=
+    if updated_at
+      Rails.cache.fetch("pull_request/#{repo}/#{number}/#{updated_at.to_i}", expires_in: 3.hour) do
+        fetch_pull_request
+      end
+    else
+      fetch_pull_request
+    end
   end
 
   def status_summary
@@ -37,11 +44,15 @@ class PullRequest
     end
   end
 
+  private
+
   def statuses_cache_key
-    "#{pull_request.id}/#{pull_request.updated_at.to_i}"
+    "statuses/#{pull_request.head.sha}}"
   end
 
-  private
+  def fetch_pull_request
+    user.octokit.pull_request(repo, number)
+  end
 
   def status_to_status(status)
     Status.new(
