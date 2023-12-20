@@ -1,5 +1,7 @@
 class PrSignetsController < ApplicationController
-  before_action :set_record, only: %i[edit update destroy gh_pull_requests toggle_expanded preview]
+  before_action :set_record, only: %i[
+  edit update destroy gh_pull_requests toggle_expanded preview gh_pull_request_size
+]
   def index
     @pr_signets = auth_user.pr_signets.order(:display_order)
   end
@@ -50,6 +52,11 @@ class PrSignetsController < ApplicationController
   end
 
   def gh_pull_requests
+  end
+
+  def gh_pull_request_size
+    render turbo_stream: turbo_stream.replace("gh_pull_request_size_pr_signet_#{@pr_signet.id}",
+                                              @pr_signet.gh_pull_request_size)
   end
 
   def toggle_expanded

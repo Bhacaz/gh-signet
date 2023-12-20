@@ -6,7 +6,12 @@
           dom_id(signet, :gh_pull_requests), **loading_args) do %>
       <h2 class="accordion-header">
         <%= link_to toggle_expanded_pr_signet_path(signet), class: "accordion-button #{signet.expanded ? '' : 'collapsed'} link-underline link-underline-opacity-0", data: { turbo_method: 'patch'} do %>
-          <%= signet.title %>&nbsp;<span style="color: #666666"></span>
+          <%= signet.title %>&nbsp;
+          <span style="color: #666666">
+            <% unless signet.expanded? %>
+              <%= turbo_frame_tag dom_id(signet, :gh_pull_request_size), loading: :lazy, src: gh_pull_request_size_pr_signet_path(signet) %>
+            <% end %>
+          </span>
         <% end %>
       </h2>
       <div id="<%= dom_id(signet, :collapse) %>" class="accordion-collapse collapse <%= signet.expanded ? 'show' : '' %>">

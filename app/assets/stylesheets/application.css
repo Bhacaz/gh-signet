@@ -71,3 +71,7 @@
 .pull-request-row:last-child {
     border-bottom: 0 !important;
 }
+
+.accordion-button {
+    background-color: #2d3339b3;
+}

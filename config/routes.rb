@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   resources :pr_signets do
     get :gh_pull_requests, on: :member
+    get :gh_pull_request_size, on: :member
     patch :toggle_expanded, on: :member
     get :preview, on: :collection
   end

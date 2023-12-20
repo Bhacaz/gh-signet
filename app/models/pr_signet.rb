@@ -32,6 +32,10 @@ class PrSignet < ApplicationRecord
     @gh_pull_requests ||= user.octokit.search_issues(query, sort => order).items
   end
 
+  def gh_pull_request_size
+    user.octokit.search_issues(query, { sort => order, per_page: 1 }).total_count
+  end
+
   private
 
   def display_order_maximum
