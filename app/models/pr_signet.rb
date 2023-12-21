@@ -25,18 +25,39 @@ class PrSignet < ApplicationRecord
   validates :display_order, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
   validate :display_order_maximum, if: :display_order_changed?
 
-  after_save :reorder_other_display_order
+  after_save :reorder_other_display_order, if: :display_order_changed?
   after_destroy :reorder_other_display_order
 
+  alias expanded? expanded
+
   def gh_pull_requests
-    @gh_pull_requests ||= user.octokit.search_issues(query, sort => order).items
+    return @gh_pull_requests if defined?(@gh_pull_requests)
+
+    response = user.octokit.search_issues(query, sort => order)
+    @gh_pull_request_size = response.total_count
+    Rails.cache.write(gh_pull_request_size_cache_key, @gh_pull_request_size, expires_in: 5.minutes)
+    @gh_pull_requests = response.items
   end
 
   def gh_pull_request_size
-    user.octokit.search_issues(query, { sort => order, per_page: 1 }).total_count
+    return @gh_pull_request_size if defined?(@gh_pull_request_size)
+
+    if expanded?
+      gh_pull_requests
+      return @gh_pull_request_size
+    end
+
+    @gh_pull_request_size =
+      Rails.cache.fetch(gh_pull_request_size_cache_key, expires_in: 5.minutes) do
+        user.octokit.search_issues(query, { sort => order, per_page: 1 }).total_count
+      end
   end
 
   private
+
+  def gh_pull_request_size_cache_key
+    "pr_signet_#{id}_gh_pull_request_size"
+  end
 
   def display_order_maximum
     size = user.pr_signets.size
