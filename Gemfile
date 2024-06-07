@@ -71,3 +71,5 @@ group :test do
 end
 
 gem "store_attribute", "~> 1.2"
+
+gem "solid_cache", "~> 0.6.0"
