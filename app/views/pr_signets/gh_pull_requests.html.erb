@@ -8,9 +8,7 @@
     <div class="accordion-body py-1">
       <% if @pr_signet.expanded %>
         <% if @pr_signet.gh_pull_requests.any? %>
-          <% @pr_signet.gh_pull_requests.each do |pull_request| %>
-            <%= render partial: 'pull_requests/pull_request', locals: { pull_request: pull_request } %>
-          <% end %>
+          <%= render partial: 'pull_requests/pull_request', collection: @pr_signet.gh_pull_requests, cached: true %>
         <% else %>
           <div class="text-center pt-3">
             <p class="text-muted">Empty</p>
