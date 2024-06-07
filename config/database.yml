@@ -9,7 +9,7 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
 
-solid_cache: &solid_cache
+solid_cache_default: &solid_cache_default
   <<: *default
   migrations_paths: db/solid_cache_migrate
 
@@ -18,7 +18,7 @@ development:
     <<: *default
     database: storage/development.sqlite3
   solid_cache:
-    <<: *solid_cache
+    <<: *solid_cache_default
     database: storage/solid_cache_development.sqlite3
 
 # Warning: The database defined as "test" will be erased and
@@ -29,7 +29,7 @@ test:
     <<: *default
     database: storage/test.sqlite3
   solid_cache:
-    <<: *solid_cache
+    <<: *solid_cache_default
     database: storage/solid_cache_test.sqlite3
 
 production:
@@ -37,5 +37,5 @@ production:
     <<: *default
     database: storage/production.sqlite3
   solid_cache:
-    <<: *solid_cache
+    <<: *solid_cache_default
     database: storage/solid_cache_production.sqlite3
