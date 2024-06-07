@@ -20,7 +20,6 @@ module GhSignet
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w(assets tasks))
     config.cache_store = :solid_cache_store
-    # config.solid_cache.connects_to database: { writing: :solid_cache }
 
     # Configuration for the application, engines, and railties goes here.
     #
