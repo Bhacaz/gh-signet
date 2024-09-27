@@ -10,6 +10,7 @@ gem "propshaft"
 
 # Use sqlite3 as the database for Active Record
 gem "sqlite3", "~> 2.1"
+gem "activerecord-enhancedsqlite3-adapter", "~> 0.8.0"
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
@@ -46,6 +47,12 @@ gem 'omniauth-github', '~> 2.0.0'
 
 gem "octokit", "~> 5.0"
 gem 'faraday-http-cache'
+gem "store_attribute", "~> 1.2"
+gem "solid_cache", "~> 1.0"
+
+group :production do
+  gem 'thruster'
+end
 
 group :development, :test do
   gem "debug"
@@ -69,9 +76,3 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
-
-gem "store_attribute", "~> 1.2"
-
-gem "solid_cache", "~> 1.0"
-
-gem "activerecord-enhancedsqlite3-adapter", "~> 0.8.0"
