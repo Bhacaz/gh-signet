@@ -3,14 +3,13 @@ source "https://rubygems.org"
 ruby "3.3.0"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem 'rails', '8.0.0.beta1'
+gem 'rails', '8.0.0'
 
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"
 
 # Use sqlite3 as the database for Active Record
-gem "sqlite3", "~> 2.1"
-gem "activerecord-enhancedsqlite3-adapter", "~> 0.8.0"
+gem "sqlite3"
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma"
@@ -23,9 +22,6 @@ gem "turbo-rails"
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails"
-
-# Use Redis adapter to run Action Cable in production
-gem "redis", ">= 4.0.1"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -49,6 +45,7 @@ gem "octokit", "~> 5.0"
 gem 'faraday-http-cache'
 gem "store_attribute", "~> 1.2"
 gem "solid_cache", "~> 1.0"
+gem 'solid_cable'
 
 group :production do
   gem 'thruster'

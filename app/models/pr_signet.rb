@@ -1,7 +1,7 @@
 class PrSignet < ApplicationRecord
   belongs_to :user
 
-  enum sort: {
+  enum :sort, {
     updated: 0,
     created: 1,
     reactions: 2,
@@ -9,7 +9,7 @@ class PrSignet < ApplicationRecord
     comments: 4
   }
 
-  enum order: {
+  enum :order, {
     desc: 0,
     asc: 1
   }
