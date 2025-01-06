@@ -13,6 +13,10 @@ solid_cache_default: &solid_cache_default
   <<: *default
   migrations_paths: db/solid_cache_migrate
 
+solid_cable_default: &solid_cable_default
+  <<: *default
+  migrations_paths: db/solid_cable_migrate
+
 development:
   primary:
     <<: *default
@@ -20,6 +24,9 @@ development:
   solid_cache:
     <<: *solid_cache_default
     database: storage/solid_cache_development.sqlite3
+  cable:
+    <<: *solid_cable_default
+    database: storage/cable_development.sqlite3
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -39,3 +46,6 @@ production:
   solid_cache:
     <<: *solid_cache_default
     database: storage/solid_cache_production.sqlite3
+  cable:
+    <<: *solid_cable_default
+    database: storage/cable_production.sqlite3
