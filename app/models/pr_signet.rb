@@ -33,7 +33,7 @@ class PrSignet < ApplicationRecord
   def gh_pull_requests
     return @gh_pull_requests if defined?(@gh_pull_requests)
 
-    response = user.octokit.search_issues(query, sort => order)
+    response = user.octokit.search_issues(date_parsed_query, sort => order)
     @gh_pull_request_size = response.total_count
     Rails.cache.write(gh_pull_request_size_cache_key, @gh_pull_request_size, expires_in: 5.minutes)
     @gh_pull_requests = response.items
@@ -49,7 +49,7 @@ class PrSignet < ApplicationRecord
 
     @gh_pull_request_size =
       Rails.cache.fetch(gh_pull_request_size_cache_key, expires_in: 5.minutes) do
-        user.octokit.search_issues(query, { sort => order, per_page: 1 }).total_count
+        user.octokit.search_issues(date_parsed_query, { sort => order, per_page: 1 }).total_count
       end
   end
 
@@ -57,6 +57,10 @@ class PrSignet < ApplicationRecord
 
   def gh_pull_request_size_cache_key
     "pr_signet_#{id}_gh_pull_request_size"
+  end
+
+  def date_parsed_query
+    QueryDateEvaluator.call(query)
   end
 
   def display_order_maximum

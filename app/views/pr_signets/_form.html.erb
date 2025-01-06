@@ -8,7 +8,8 @@
     <div class="container my-3">
       <%= form.label :query, class: 'form-label' do %>
         Query
-        (<a target="_blank" href="https://docs.github.com/en/search-github/searching-on-github/searching-issues-and-pull-requests">doc</a>)
+        (<a target="_blank" href="https://docs.github.com/en/search-github/searching-on-github/searching-issues-and-pull-requests">doc</a>).
+        Dynamic date <code>updated:>={1.month.ago}</code>
       <% end %>
       <div class="row justify-content-between">
         <div class="col">
