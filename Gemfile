@@ -47,6 +47,8 @@ gem "store_attribute", "~> 1.2"
 gem "solid_cache", "~> 1.0"
 gem 'solid_cable'
 
+gem 'tailwindcss-rails'
+
 group :production do
   gem 'thruster'
 end
