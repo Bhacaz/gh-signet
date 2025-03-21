@@ -1,17 +1,19 @@
-<div class="container my-2 d-flex justify-content-between" id="<%= dom_id(pr_signet) %>">
-  <div>
-    <h4><%= pr_signet.title %></h4>
-    <p><%= pr_signet.query %></p>
-  </div>
-  <div class="d-flex flex-row my-auto">
-    <%= button_to edit_pr_signet_path(pr_signet), method: :get, class: 'btn py-0' do %>
-      <i class="bi bi-pencil"></i>
-    <% end %>
+<div class="p-4 my-3 bg-base-100" id="<%= dom_id(pr_signet) %>">
+  <div class="flex justify-between items-center">
+    <div>
+      <h3 class="text-lg font-medium mb-1"><%= pr_signet.title %></h3>
+      <p class="text-sm opacity-70"><%= pr_signet.query %></p>
+    </div>
+    <div class="flex gap-2">
+      <%= button_to edit_pr_signet_path(pr_signet), method: :get, class: 'btn btn-ghost btn-sm btn-square' do %>
+        <i class="bi bi-pencil"></i>
+      <% end %>
 
-    <%= link_to pr_signet_path(pr_signet),
-                  class: 'btn py-0',
+      <%= link_to pr_signet_path(pr_signet),
+                  class: 'btn btn-ghost btn-sm btn-square text-error hover:bg-error hover:bg-opacity-10',
                   data: { turbo_confirm: "Delete \"#{pr_signet.title}\"?", turbo_method: :delete } do %>
-      <i class="bi bi-x-lg"></i>
-    <% end %>
+        <i class="bi bi-x-lg"></i>
+      <% end %>
+    </div>
   </div>
 </div>

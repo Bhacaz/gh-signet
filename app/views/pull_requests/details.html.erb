@@ -1,4 +1,4 @@
-<div class="card bg-base-100 max-w-200 mx-auto">
+<div class="card bg-base-100 max-w-220 mx-auto">
   <div class="card-body">
     <h2 class="card-title"><%= @pull_request.title %></h2>
 
@@ -13,8 +13,10 @@
 
     <div class="text-sm opacity-70 pb-4 flex gap-4">
       <%= render partial: 'pull_requests/external_link', locals: { pull_request: @pull_request } %>
-      <kbd class="kbd"><%= @pull_request.base.ref %></kbd> <i class="bi bi-arrow-left-short"></i>
-      <kbd class="kbd"><%= @pull_request.head.ref %></kbd>
+      <div>
+        <kbd class="kbd"><%= @pull_request.base.ref %></kbd> <i class="bi bi-arrow-left-short"></i>
+        <kbd class="kbd"><%= @pull_request.head.ref %></kbd>
+      </div>
     </div>
 
     <div class="flex flex-wrap gap-1 my-2">

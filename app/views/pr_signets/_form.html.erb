@@ -1,70 +1,78 @@
-<div data-controller="pr-signet-form">
+<div data-controller="pr-signet-form" class="p-4 max-w-220 mx-auto">
   <%= form_with(model: pr_signet) do |form| %>
-    <div class="container my-3">
-      <%= form.label :title, class: 'form-label' %>
-      <%= form.text_field :title, class: 'form-control', required: true %>
+    <div class="form-control w-full mb-4">
+      <%= form.label :title, class: 'label' %>
+      <%= form.text_field :title, class: 'input input-bordered w-full', required: true %>
     </div>
 
-    <div class="container my-3">
-      <%= form.label :query, class: 'form-label' do %>
-        Query
-        (<a target="_blank" href="https://docs.github.com/en/search-github/searching-on-github/searching-issues-and-pull-requests">doc</a>).
-        Dynamic date <code>updated:>={1.month.ago}</code>, <code>merged:>={beginning_of_week}</code>
+    <div class="form-control w-full mb-4">
+      <%= form.label :query, class: 'label' do %>
+        <span class="label-text">
+          Query
+          (<a target="_blank" href="https://docs.github.com/en/search-github/searching-on-github/searching-issues-and-pull-requests" class="link link-primary">doc</a>).
+          <div class="tooltip" data-tip="Dynamic date examples: updated:>={1.month.ago}, merged:>={beginning_of_week}">
+            <button class="btn btn-xs btn-circle btn-outline btn-info ml-1 mb-1">
+              <i class="bi bi-info"></i>
+            </button>
+          </div>
+        </span>
       <% end %>
-      <div class="row justify-content-between">
-        <div class="col">
-          <%= form.text_field :query, class: 'form-control', required: true, data: { 'pr-signet-form-target' => 'query' } %>
-        </div>
-        <div class="col-1 fs-5 my-1">
-          <a data-action="pr-signet-form#showLibraryModal">
-            <i class="bi bi-star-fill text-warning"></i>
-          </a>
-        </div>
+      <div class="flex justify-between items-center">
+        <%= form.text_field :query, class: 'input input-bordered flex-grow', required: true, data: { 'pr-signet-form-target' => 'query' } %>
+        <button data-action="pr-signet-form#showLibraryModal" class="btn ml-2 cursor-pointer">
+          <i class="bi bi-star text-warning text-lg"></i>
+        </button>
       </div>
     </div>
 
-    <div class="container my-3">
-      <%= form.label :sort, class: 'form-label' %>
-      <%= form.select :sort, PrSignet.sorts.keys.map { |sort| [sort.capitalize, sort] }, class: 'form-select' %>
-      <%= form.label :order, class: 'form-label' %>
-      <%= form.select :order, PrSignet.orders.keys.map { |order| [order.capitalize, order] }, class: 'form-select' %>
+    <div class="flex gap-4 max-w-2xl mb-4">
+      <div class="form-control w-1/2">
+        <%= form.label :sort, class: 'label' %>
+        <%= form.select :sort, PrSignet.sorts.keys.map { |sort| [sort.capitalize, sort] }, {}, class: 'select select-bordered w-full' %>
+      </div>
+      <div class="form-control w-1/2">
+        <%= form.label :order, class: 'label' %>
+        <%= form.select :order, PrSignet.orders.keys.map { |order| [order.capitalize, order] }, {}, class: 'select select-bordered w-full' %>
+      </div>
     </div>
 
-    <div class="container my-3">
-      <%= form.label :display_order, class: 'form-label' %>
-      <%= form.number_field :display_order, required: true %>
+    <div class="form-control w-full max-w-xs mb-4">
+      <%= form.label :display_order, class: 'label' %>
+      <%= form.number_field :display_order, class: 'input input-bordered w-full', required: true %>
     </div>
 
-    <div class="container mt-3">
+    <div class="flex gap-2 mt-6">
       <%= form.submit 'Confirm', class: 'btn btn-primary' %>
       <%= form.submit 'Preview', name: :preview, class: "btn btn-secondary" %>
     </div>
-<% end %>
+  <% end %>
 
-<% if @pr_signet.errors.any? %>
-  <%= render partial: 'show_errors', locals: { record: @pr_signet } %>
-<% end %>
+  <% if @pr_signet.errors.any? %>
+    <%= render partial: 'show_errors', locals: { record: @pr_signet } %>
+  <% end %>
 
   <%= turbo_frame_tag :new_signet_preview %>
 
   <div class="modal" id="library-query-modal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-body">
-          <div class="container pt-3">
-            <% PrQueryLibrary::LIBRARY.each do |name, query| %>
-              <p>
-              <p class="mb-1"><%= name %></p>
-              <%= link_to 'javascript:void(0)',
-                          class: "link-body-emphasis link-underline-opacity-0",
-                          data: { action: 'pr-signet-form#useThisStartQuery' } do %>
-                <i class="bi bi-check-square"></i> <%= query %>
-              <% end %>
-              </a>
-              </p>
+    <div class="modal-box">
+      <h3 class="font-bold text-lg mb-4">Query Library</h3>
+      <div class="space-y-3">
+        <% PrQueryLibrary::LIBRARY.each do |name, query| %>
+          <div>
+            <p class="font-medium"><%= name %></p>
+            <%= link_to 'javascript:void(0)',
+                        class: "link link-hover text-base-content",
+                        data: { action: 'pr-signet-form#useThisStartQuery' } do %>
+              <div class="flex items-center">
+                <i class="bi bi-check-square mr-2"></i> 
+                <span class="text-sm"><%= query %></span>
+              </div>
             <% end %>
           </div>
-        </div>
+        <% end %>
+      </div>
+      <div class="modal-action">
+        <a class="btn" data-action="pr-signet-form#hideLibraryModal">Close</a>
       </div>
     </div>
   </div>
