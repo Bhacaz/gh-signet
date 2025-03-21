@@ -4,11 +4,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
 
 :root {
+    font-family: "Roboto Mono", sans-serif;
     --bs-primary: #49a3a9;
     --bs-primary-darker: #30858d;
     --bs-accent: #7de381;
     --gradient-focus: linear-gradient(120deg, #7de381, #54b4bb);
-    --bs-font-sans-serif: "Roboto Mono", sans-serif;
 }
 
 .text-primary {
@@ -61,10 +61,6 @@
 .ref-and-time-ago {
     font-size: 0.85rem;
     padding-top: 0.25rem;
-}
-
-.offcanvas {
-    --bs-offcanvas-width: 600px;
 }
 
 .pull-request-row:last-child {

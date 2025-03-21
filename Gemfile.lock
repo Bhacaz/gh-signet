@@ -240,6 +240,8 @@ GEM
     regexp_parser (2.8.3)
     reline (0.6.0)
       io-console (~> 0.5)
+    requestjs-rails (0.0.12)
+      railties (>= 6.1.0)
     rexml (3.3.7)
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
@@ -313,6 +315,7 @@ DEPENDENCIES
   propshaft
   puma
   rails (= 8.0.0)
+  requestjs-rails
   selenium-webdriver
   solid_cable
   solid_cache (~> 1.0)

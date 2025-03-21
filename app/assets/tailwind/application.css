@@ -2,4 +2,3 @@
 @plugin "./daisyui.js" {
     themes: dim --default, dim --prefersdark;
 }
-

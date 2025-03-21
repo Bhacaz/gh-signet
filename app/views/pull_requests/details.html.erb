@@ -1,0 +1,65 @@
+<div class="card bg-base-100 max-w-200 mx-auto">
+  <div class="card-body">
+    <h2 class="card-title"><%= @pull_request.title %></h2>
+
+    <div class="flex items-center gap-2 my-4">
+      <div class="avatar mr-1">
+        <div class="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+          <%= image_tag @pull_request.user.avatar_url %>
+        </div>
+      </div>
+      <%= link_to @pull_request.user.login, @pull_request.user.html_url, class: "link link-hover" %>
+    </div>
+
+    <div class="text-sm opacity-70 pb-4 flex gap-4">
+      <%= render partial: 'pull_requests/external_link', locals: { pull_request: @pull_request } %>
+      <kbd class="kbd"><%= @pull_request.base.ref %></kbd> <i class="bi bi-arrow-left-short"></i>
+      <kbd class="kbd"><%= @pull_request.head.ref %></kbd>
+    </div>
+
+    <div class="flex flex-wrap gap-1 my-2">
+      <%= render partial: 'pull_requests/label', collection: @pull_request.labels %>
+    </div>
+
+  </div>
+
+  <div class="stats stats-vertical lg:stats-horizontal my-2">
+    <div class="stat">
+      <div class="stat-figure text-info">
+        <i class="bi bi-circle"></i>
+      </div>
+      <div class="stat-title">Commits</div>
+      <div class="stat-value"><%= @pull_request.commits %></div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-figure text-success">
+        <i class="bi bi-plus-circle"></i>
+      </div>
+      <div class="stat-title">Additions</div>
+      <div class="stat-value text-success"><%= @pull_request.additions %></div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-figure text-error">
+        <i class="bi bi-dash-circle"></i>
+      </div>
+      <div class="stat-title">Deletions</div>
+      <div class="stat-value text-error"><%= @pull_request.deletions %></div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-figure text-info">
+        <i class="bi bi-files"></i>
+      </div>
+      <div class="stat-title">Files Changed</div>
+      <div class="stat-value"><%= @pull_request.changed_files %></div>
+    </div>
+  </div>
+
+  <div class="divider">Status Checks</div>
+
+  <% @statuses.each do |status| %>
+    <%= render partial: 'pull_requests/commit_status', locals: { status: status } %>
+  <% end %>
+</div>

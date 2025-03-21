@@ -1,9 +1,5 @@
-<div id="dashboard-container" class="mt-4" style="margin-bottom: 4em;">
+<div id="dashboard-container" class="m-4 mx-auto min-w-lg max-w-4xl">
   <% @pr_signets.each do |signet| %>
-    <div class="accordion">
-      <div class="accordion-item">
-        <%= render partial: 'pr_list', locals: { signet: signet } %>
-      </div>
-    </div>
+    <%= render partial: 'pr_list', locals: { signet: signet } %>
   <% end %>
 </div>
