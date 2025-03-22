@@ -1,4 +1,4 @@
-<div id="dashboard-container" class="m-4 mx-auto min-w-lg max-w-4xl">
+<div id="dashboard-container" class="m-4 mx-auto min-w-lg">
   <% @pr_signets.each do |signet| %>
     <%= render partial: 'pr_list', locals: { signet: signet } %>
   <% end %>
