@@ -1,41 +1,30 @@
-<nav class="navbar navbar-expand bg-body-tertiary px-3">
-  <div class="container-fluid">
-    <%= link_to 'GH Signet', dashboard_path, class: 'navbar-brand' %>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="d-flex">
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <%= button_to pr_signets_path, method: :get, class: 'btn py-0' do %>
-              <i class="bi bi-bookmarks fs-4"></i>
-            <% end %>
-          </li>
-          <li class="nav-item">
-            <%= button_to new_pr_signet_path, method: :get, class: 'btn py-0' do %>
-              <i class="bi bi-bookmark-plus fs-4"></i>
-            <% end %>
-          </li>
-          <li class="nav-item ml-2 dropdown">
-            <a class="nav-link p-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <%= image_tag auth_user.avatar_url, class: "mg-thumbnail rounded-circle p-1", height: 40 %>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-end">
-              <li>
-                <%= link_to 'Logout', logout_path, class: 'dropdown-item' %>
-              </li>
-              <li><hr class="dropdown-divider"></li>
-              <li>
-                <%= link_to 'Delete account',
-                            user_path,
-                            class: 'dropdown-item text-danger',
-                            data: { turbo_confirm: 'Deleting account. Are you sure?', turbo_method: :delete } %>
-              </li>
-            </ul>
-          </li>
-        </ul>
+<div class="navbar bg-base-200 px-3">
+  <div class="navbar-start">
+    <%= link_to 'GH Signet', dashboard_path, class: 'btn btn-ghost normal-case text-xl' %>
+  </div>
+  <div class="navbar-end">
+    <%= link_to pr_signets_path, class: 'btn btn-ghost text-xl' do %>
+      <i class="bi bi-bookmarks"></i>
+    <% end %>
+    <%= link_to new_pr_signet_path, class: 'btn btn-ghost text-xl' do %>
+      <i class="bi bi-bookmark-plus"></i>
+    <% end %>
+    <div class="dropdown dropdown-end">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+        <div class="w-10 rounded-full">
+          <%= image_tag auth_user.avatar_url, alt: "Avatar" %>
+        </div>
       </div>
+      <ul tabindex="0" class="menu dropdown-content bg-base-200 rounded-box z-1 mt-4 w-52 p-2 shadow-sm">
+        <li>
+          <%= link_to 'Logout', logout_path %>
+        </li>
+        <li>
+          <%= link_to 'Delete account', user_path,
+                class: 'text-error',
+                data: { turbo_confirm: 'Deleting account. Are you sure?', turbo_method: :delete } %>
+        </li>
+      </ul>
     </div>
   </div>
-</nav>
+</div>

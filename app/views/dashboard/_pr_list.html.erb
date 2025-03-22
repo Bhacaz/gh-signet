@@ -1,25 +1,27 @@
-<% loading_args = signet.expanded ? { loading: :lazy,
-                    src: gh_pull_requests_pr_signet_path(signet) } : {} %>
-<%= turbo_frame_tag(
-      dom_id(signet, :gh_pull_requests), **loading_args) do %>
-  <h2 class="accordion-header">
-    <%= link_to toggle_expanded_pr_signet_path(signet), class: "accordion-button #{signet.expanded ? '' : 'collapsed'} link-underline link-underline-opacity-0", data: { turbo_method: 'patch'} do %>
-      <%= signet.title %>&nbsp;
-      <span style="color: #666666">
-        <% unless signet.expanded? %>
-          <%= turbo_frame_tag dom_id(signet, :gh_pull_request_size), loading: :lazy, src: gh_pull_request_size_pr_signet_path(signet) %>
-        <% end %>
-      </span>
-    <% end %>
-  </h2>
-  <div id="<%= dom_id(signet, :collapse) %>" class="accordion-collapse collapse <%= signet.expanded ? 'show' : '' %>">
-    <div class="accordion-body">
-      <p class="card-text placeholder-glow">
-        <span class="placeholder col-7"></span>
-        <span class="placeholder col-4"></span>
-        <span class="placeholder col-12"></span>
-        <span class="placeholder col-4"></span>
-      </p>
-    </div>
+<div class="collapse collapse-arrow my-2 border border-base-300 <%= signet.expanded ? 'collapse-open' : '' %>"
+     data-controller="signet-collapse"
+     data-signet-collapse-toggle-url-value="<%= toggle_expanded_pr_signet_path(signet) %>">
+  <input type="checkbox" data-action="click->signet-collapse#toggle">
+  <div href="#" class="collapse-title bg-base-300">
+    <%= signet.title %>&nbsp;
+    <span class="text-accent">
+      <%= turbo_frame_tag dom_id(signet, :gh_pull_request_size), loading: :lazy,
+                          src: gh_pull_request_size_pr_signet_path(signet) %>
+    </span>
   </div>
-<% end %>
+
+  <div class="collapse-content">
+    <%= turbo_frame_tag(dom_id(signet, :gh_pull_requests),
+         loading: :lazy,
+         src: gh_pull_requests_pr_signet_path(signet)
+        ) do %>
+        <div class="flex py-2 gap-x-3 mt-2">
+          <div class="skeleton h-12 w-12 rounded-full"></div>
+          <div>
+            <div class="skeleton mt-1 mb-2 h-4 w-68"></div>
+            <div class="skeleton h-4 w-40"></div>
+          </div>
+        </div>
+    <% end %>
+  </div>
+</div>

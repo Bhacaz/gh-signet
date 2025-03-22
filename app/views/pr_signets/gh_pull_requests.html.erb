@@ -1,20 +1,9 @@
 <%= turbo_frame_tag dom_id(@pr_signet, :gh_pull_requests) do %>
-  <h2 class="accordion-header">
-    <%= link_to toggle_expanded_pr_signet_path, class: "accordion-button #{@pr_signet.expanded ? '' : 'collapsed'} link-underline link-underline-opacity-0", data: { turbo_method: 'patch' } do %>
-      <%= @pr_signet.title %>&nbsp;<span style="color: #666666"><%= @pr_signet.gh_pull_request_size %></span>
+    <% if @pr_signet.gh_pull_requests.any? %>
+      <%= render partial: 'pull_requests/pull_request', collection: @pr_signet.gh_pull_requests, cached: true %>
+    <% else %>
+      <div class="text-center pt-3">
+        <p class="text-muted">Empty</p>
+      </div>
     <% end %>
-  </h2>
-  <div id="<%= dom_id(@pr_signet, :collapse) %>" class="accordion-collapse collapse <%= @pr_signet.expanded ? 'show' : '' %>">
-    <div class="accordion-body py-1">
-      <% if @pr_signet.expanded %>
-        <% if @pr_signet.gh_pull_requests.any? %>
-          <%= render partial: 'pull_requests/pull_request', collection: @pr_signet.gh_pull_requests, cached: true %>
-        <% else %>
-          <div class="text-center pt-3">
-            <p class="text-muted">Empty</p>
-          </div>
-        <% end %>
-      <% end %>
-    </div>
-  </div>
 <% end %>

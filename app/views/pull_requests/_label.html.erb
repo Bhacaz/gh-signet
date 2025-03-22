@@ -1,4 +1,25 @@
-<span class="badge rounded-pill",
-      style="background-color: <%= "##{label.color}" %>; color: <%= text_color_contrast(label.color) %> ">
+<% 
+  r = label.color[0..1].hex
+  g = label.color[2..3].hex
+  b = label.color[4..5].hex
+  is_dark = (r * 0.299 + g * 0.587 + b * 0.114) < 128
+  
+  if is_dark
+    # Create a pastel version of the color by lightening it
+    pastel_r = r + ((255 - r) * 0.7).to_i
+    pastel_g = g + ((255 - g) * 0.7).to_i
+    pastel_b = b + ((255 - b) * 0.7).to_i
+    text_color = "#%02x%02x%02x" % [pastel_r, pastel_g, pastel_b]
+  else
+    text_color = "##{label.color}"
+  end
+  
+  bg_opacity = is_dark ? 0.3 : 0.2
+%>
+<div class="badge badge-outline badge-soft badge-sm rounded-lg"
+     style="color: <%= text_color %>;
+            background-color: rgba(<%= [r, g, b].join(', ') %>, <%= bg_opacity %>);
+            border: 1px solid #<%= label.color %>;
+            margin: 0.1rem;">
   <%= label.name %>
-</span>
+</div>

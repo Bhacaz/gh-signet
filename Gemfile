@@ -22,6 +22,7 @@ gem "turbo-rails"
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails"
+gem 'requestjs-rails'
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -46,6 +47,8 @@ gem 'faraday-http-cache'
 gem "store_attribute", "~> 1.2"
 gem "solid_cache", "~> 1.0"
 gem 'solid_cable'
+
+gem 'tailwindcss-rails'
 
 group :production do
   gem 'thruster'

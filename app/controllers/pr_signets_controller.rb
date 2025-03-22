@@ -61,10 +61,7 @@ class PrSignetsController < ApplicationController
 
   def toggle_expanded
     @pr_signet.update!(expanded: !@pr_signet.expanded)
-    unless @pr_signet.expanded
-      render :gh_pull_requests, id: @pr_signet.id
-      nil
-    end
+    head :no_content
   end
 
   def preview
