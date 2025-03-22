@@ -1,14 +1,16 @@
 <%= turbo_frame_tag :new_signet_preview do %>
-  <div id="modal-preview" class="modal fade show" style="display: block" data-action="click->pr-signet-form#hidePreviewModal">
-    <div class="modal-dialog">
+  <dialog id="modal-preview" class="modal" open>
+    <div class="modal-box">
       <div class="modal-content">
-        <div class="modal-body modal-dialog modal-dialog-scrollable">
-          <% @pr_signet.gh_pull_requests.each do |pull_request| %>
-            <%= render partial: 'pull_requests/pull_request', locals: { pull_request: pull_request } %>
-          <% end %>
-        </div>
+        <% @pr_signet.gh_pull_requests.each do |pull_request| %>
+          <%= render partial: 'pull_requests/pull_request', locals: { pull_request: pull_request } %>
+        <% end %>
+      </div>
+      <div class="modal-action">
+        <form method="dialog">
+          <button class="btn">Close</button>
+        </form>
       </div>
     </div>
-  </div>
-  <div class="modal-backdrop fade show"></div>
+  </dialog>
 <% end %>

@@ -7,20 +7,6 @@ export default class extends Controller {
         let value = event.target.innerText
         value = value.trim()
         this.queryTarget.value = value
-        document.getElementById('library-query-modal').style.display = 'none';
-        document.getElementsByClassName('modal-backdrop')[0].remove()
-    }
-
-    showLibraryModal() {
-        this.libraryQueryModal().show()
-    }
-
-    hidePreviewModal() {
-        document.getElementById('modal-preview').style.display = 'none';
-        document.getElementsByClassName('modal-backdrop')[0].remove();
-    }
-
-    libraryQueryModal() {
-        return new bootstrap.Modal('#library-query-modal')
+        document.getElementById("library_query_modal").close()
     }
 }

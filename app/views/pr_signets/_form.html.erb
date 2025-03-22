@@ -19,7 +19,7 @@
       <% end %>
       <div class="flex justify-between items-center">
         <%= form.text_field :query, class: 'input input-bordered flex-grow', required: true, data: { 'pr-signet-form-target' => 'query' } %>
-        <button data-action="pr-signet-form#showLibraryModal" class="btn ml-2 cursor-pointer">
+        <button type="button" onclick="library_query_modal.showModal()" class="btn ml-2 cursor-pointer">
           <i class="bi bi-star text-warning text-lg"></i>
         </button>
       </div>
@@ -53,7 +53,7 @@
 
   <%= turbo_frame_tag :new_signet_preview %>
 
-  <div class="modal" id="library-query-modal">
+  <dialog class="modal" id="library_query_modal">
     <div class="modal-box">
       <h3 class="font-bold text-lg mb-4">Query Library</h3>
       <div class="space-y-3">
@@ -72,8 +72,11 @@
         <% end %>
       </div>
       <div class="modal-action">
-        <a class="btn" data-action="pr-signet-form#hideLibraryModal">Close</a>
+        <form method="dialog">
+          <!-- if there is a button in form, it will close the modal -->
+          <button class="btn">Close</button>
+        </form>
       </div>
     </div>
-  </div>
+  </dialog>
 </div>
