@@ -1,6 +1,6 @@
 <%= link_to pull_request&.html_url,
             target: '_blank',
-            class: ('link-underline link-underline-opacity-0 ' + (pull_request.draft ? 'link-body-emphasis' : 'link-primary')) do %>
+            class: ('link link-hover ' + (pull_request.draft ? 'text-primary' : 'text-cyan-400')) do %>
   <i class="bi bi-box-arrow-up-right"></i>
   <%= pull_request_ref_string(pull_request) %>
 <% end %>

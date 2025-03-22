@@ -1,8 +1,8 @@
-<div class="collapse collapse-arrow border border-gray-700 border-2 my-2 <%= signet.expanded ? 'collapse-open' : '' %>"
+<div class="collapse collapse-arrow my-2 border border-base-300 <%= signet.expanded ? 'collapse-open' : '' %>"
      data-controller="signet-collapse"
      data-signet-collapse-toggle-url-value="<%= toggle_expanded_pr_signet_path(signet) %>">
   <input type="checkbox" data-action="click->signet-collapse#toggle">
-  <div href="#" class="collapse-title bg-cyan-950">
+  <div href="#" class="collapse-title bg-base-300">
     <%= signet.title %>&nbsp;
     <span class="text-accent">
       <%= turbo_frame_tag dom_id(signet, :gh_pull_request_size), loading: :lazy,

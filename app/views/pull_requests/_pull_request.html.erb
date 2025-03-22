@@ -1,4 +1,4 @@
-<div class="bg-base-100 mb-2">
+<div class="bg-base-100 mb-2 border-b border-base-300 last:border-b-0">
   <div class="p-4">
     <div class="flex items-center">
       <div class="mr-5">
@@ -16,7 +16,7 @@
           <%= link_to pull_request.title,
                       pull_request_details_path(pull_request_ref(pull_request.pull_request)),
                       target: '_top',
-                     class: 'hover:text-primary transition-colors duration-200' %>
+                     class: 'hover:text-success transition-colors duration-200' %>
         </h3>
         
         <div class="text-sm opacity-70 mt-1">
@@ -33,12 +33,10 @@
         <div class="flex flex-wrap justify-end gap-1 mb-1">
           <%= render partial: 'pull_requests/label', collection: pull_request.labels %>
         </div>
-        <div class="badge badge-outline badge-sm">
+        <div class="text-sm">
           <i class="bi bi-chat-left mr-1"></i> <%= pull_request.comments %>
         </div>
       </div>
     </div>
   </div>
 </div>
-<hr class="border-base-300 mx-4 my-0">
-

@@ -5,10 +5,6 @@
 
 :root {
     font-family: "Roboto Mono", sans-serif;
-    --bs-primary: #49a3a9;
-    --bs-primary-darker: #30858d;
-    --bs-accent: #7de381;
-    --gradient-focus: linear-gradient(120deg, #7de381, #54b4bb);
 }
 
 .text-primary {
