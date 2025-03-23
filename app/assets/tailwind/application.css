@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @plugin "./daisyui.js";
 
-:root,:root:has(input.theme-controller[value=light]:checked),[data-theme="mytheme"] {
+@plugin "./daisyui-theme.js" {
     name: "mytheme";
     default: true;
     prefersdark: true;
