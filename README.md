@@ -2,7 +2,8 @@
 
 https://gh-signet.app.bhacaz.com
 
-<img width="1448" alt="image" src="./docs/img.png">
+<img width="1432" height="859" alt="image" src="https://github.com/user-attachments/assets/9dbc0102-1515-4b30-8adc-d7c2b8f2e924" />
+
 
 ## Selfhost
 
